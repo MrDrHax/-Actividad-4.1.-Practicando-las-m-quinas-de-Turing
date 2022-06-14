@@ -1,0 +1,42 @@
+name: idk wtf I am doing
+source code: |
+  input: '1111-11'
+  blank: ' '
+  minus: '-'
+  start state: start
+  table:
+    start:
+      ' ': {write: ' ', L: goToMinus}
+      [1, '-']: R
+      
+    goToMinus:
+      1: L
+      '-': {write: 1, L: writeMinus}
+      
+    GoToEnd:
+      ' ': {write: ' ', L: remove2}
+      [1, '-']: R
+    
+    writeMinus:
+      [1, ' ', '-']: {write: '-', R: GoToEnd}
+      
+    remove2:
+      [1, ' ', '-']: {write: ' ', L: remove1}
+    
+    remove1:
+      [1, ' ', '-']: {write: ' ', L: test}
+      
+    test:
+      [' ', '-']: {write: ' ', L: done}
+      1: {L: goToMinus}
+    
+    done:
+positions:
+  start: {x: 400.09, y: 249.98}
+  goToMinus: {x: 536.14, y: 252.8}
+  GoToEnd: {x: 279.16, y: 139.73, fixed: false}
+  writeMinus: {x: 428.79, y: 144.09, fixed: false}
+  remove2: {x: 271.68, y: 287.9, fixed: false}
+  remove1: {x: 389.23, y: 385.48, fixed: false}
+  test: {x: 542.52, y: 385.84, fixed: false}
+  done: {x: 653.86, y: 247.21}
